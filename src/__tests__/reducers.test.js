@@ -94,4 +94,29 @@ describe('reducer', () => {
       expect(reducer(state, action)).toEqual(expectedState);
     });
   });
+
+  describe('KILL_ROBOT', () => {
+    it('should kill a robot', () => {
+      const [x, y, orientation, lost] = [1, 2, 180, true];
+      const rest = {};
+
+      const state = {
+        rest,
+        robot: {
+          x, y, orientation, lost: false,
+        },
+      };
+      const action = {
+        type: types.KILL_ROBOT,
+      };
+      const expectedState = {
+        rest,
+        robot: {
+          x, y, orientation, lost,
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
 });

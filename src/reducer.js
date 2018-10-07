@@ -47,6 +47,15 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
+    case types.KILL_ROBOT:
+      return {
+        ...state,
+        robot: {
+          ...state.robot,
+          lost: true,
+        },
+      };
+
     default:
       return state;
   }

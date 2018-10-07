@@ -3,7 +3,7 @@ import readline from 'readline';
 import fs from 'fs';
 import thunk from 'redux-thunk';
 import {
-  initMap, placeRobot, turnRobot, moveRobotForward,
+  initMap, placeRobot, turnRobot, moveRobotForward, killRobot,
 } from './actions';
 import reducer from './reducer';
 import logger from './middleware/logger';
@@ -24,6 +24,7 @@ dispatch(turnRobot(0));
 dispatch(moveRobotForward());
 dispatch(turnRobot(90));
 dispatch(moveRobotForward());
+dispatch(killRobot());
 
 const rl = readline.createInterface({
   input: fs.createReadStream('input.txt', 'utf8'),

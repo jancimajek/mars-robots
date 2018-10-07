@@ -34,6 +34,11 @@ describe('actions', () => {
     expect(actions.moveRobot(x, y)).toEqual(expectedAction);
   });
 
+  it('killRobot', () => {
+    const expectedAction = { type: types.KILL_ROBOT };
+    expect(actions.killRobot()).toEqual(expectedAction);
+  });
+
   it('moveRobotForward', async () => {
     const initialState = {
       map: { x: 2, y: 2 },

@@ -1,41 +1,49 @@
-# Boilerplate for NodeJS app
+# Title
 
-Use this as a quick start for a new NodeJS app. 
+Description
 
-*Note:* Use the [`README.template.md`](README.template.md) as template for the actual app
+## ℹ Info
 
+Detailed information about the app
 
-## Dev dependencies
+## 📲 Install
+```bash
+git clone <GIT_REPO_URL>
+cd <PROJECT_NAME>
+yarn install
+```
 
-The following `devDependencies` are pre-installed & pre-configured:
+## ✅ Test
+```bash
+yarn test
+```
 
-- `babel` transpiler with the CLI tools configured to use the latest `@babel/preset-env` and `node | current` target .
-- `babel-node` and `nodemon` for debugging
-- `jest` and `babel-jest` for testing
-- `eslint` with `airbnb` base config using `babel-eslint` parser and a few convenient custom rules.
-- `husky` for integration with git, configured to run `eslint` on staged files and `jest` tests with coverage on every git commit
+or run all tests (verbose mode) with coverage
+```bash
+yarn test:coverage
+```
 
+## ▶️ Run
+```bash
+yarn start
+```
 
-## Dependencies
+## 🏗 Develop
 
-The following `dependencies` are pre-installed & pre-configured:
+Run the app in watch mode with debugging on
+```bash
+yarn debug
+```
 
-- `@babel/polyfill`
-- `debug` for logging modular debug output to use instead of `console.log`
+Run all tests in watch mode
+```bash
+yarn test:watch
+```
 
+## 📖 Notes
 
-## Scripts
+Notes
 
-The following `yarn`/`npm` `scripts` are pre-configured:
+## 🛠 Troubleshooting
 
-| Script  | Description |
-|---------|--------------------------|
-| `build` | transpile the code for production use into `build/` folder |
-| `debug` | run the app in watch mode using on-the-fly transpiling |
-| `husky:pre-commit` | run pre-commit lint and test by `husky` |
-| `lint` | run ESLint on all files in `src/` directory |
-| `lint:staged` | run ESLint on all staged files |
-| `start` | build and run the app |
-| `test` | run tests |
-| `test:coverage` | run tests in verbose mode with coverage |
-| `test:watch` | run tests in watch mode to automatically re-run tests on change |
+Troubleshooting

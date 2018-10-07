@@ -16,4 +16,10 @@ describe('actions', () => {
     const action = actions.placeRobot(x, y, 'S');
     expect(action).toEqual(expectedAction);
   });
+
+  it('turnRobot', () => {
+    const orientation = 270;
+    const expectedAction = { type: types.TURN_ROBOT, orientation };
+    expect(actions.turnRobot(orientation)).toEqual(expectedAction);
+  });
 });

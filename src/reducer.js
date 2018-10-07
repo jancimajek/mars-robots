@@ -28,6 +28,15 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
+    case types.TURN_ROBOT:
+      return {
+        ...state,
+        robot: {
+          ...state.robot,
+          orientation,
+        },
+      };
+
     default:
       return state;
   }

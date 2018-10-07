@@ -42,4 +42,31 @@ describe('reducer', () => {
       expect(reducer(state, action)).toEqual(expectedState);
     });
   });
+
+  describe('TURN_ROBOT', () => {
+    it('should turn a robot', () => {
+      const [x, y, orientation] = [1, 2, 180, false];
+      const rest = {};
+
+      const state = {
+        rest,
+        robot: {
+          x,
+          y,
+          orientation: 90,
+        },
+      };
+      const action = {
+        type: types.TURN_ROBOT, orientation,
+      };
+      const expectedState = {
+        rest,
+        robot: {
+          x, y, orientation,
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import readline from 'readline';
 import fs from 'fs';
-import { initMap, placeRobot } from './actions';
+import { initMap, placeRobot, turnRobot } from './actions';
 import reducer from './reducer';
 import logger from './middleware/logger';
 import debug from './utils/debug';
@@ -17,6 +17,7 @@ const { dispatch, getState } = store;
 debug('state')(getState());
 dispatch(initMap(1, 2));
 dispatch(placeRobot(0, 1, 'W'));
+dispatch(turnRobot(180));
 
 const rl = readline.createInterface({
   input: fs.createReadStream('input.txt', 'utf8'),

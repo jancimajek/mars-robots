@@ -1,15 +1,20 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import readline from 'readline';
 import fs from 'fs';
 import { initMap } from './actions';
 import reducer from './reducer';
+import logger from './middleware/logger';
 import debug from './utils/debug';
 
 process.env.APP_NAME = process.env.APP_NAME || 'robots';
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  applyMiddleware(logger),
+);
 debug('*')(store);
 
 const { dispatch, getState } = store;
+debug('state')(getState());
 dispatch(initMap(1, 2));
 debug('state')(getState());
 

@@ -1,8 +1,9 @@
 import logger from '../logger';
 import debug from '../../utils/debug';
 
+const mockDebugModule = jest.fn(() => {});
 jest.mock('../../utils/debug', () => jest.fn(
-  () => () => {},
+  () => mockDebugModule,
 ));
 
 afterEach(() => {
@@ -38,5 +39,6 @@ describe('logger middleware', () => {
     invoke(action);
 
     expect(debug).toHaveBeenCalledWith('dispatch');
+    expect(mockDebugModule).toHaveBeenCalledWith('%o', action);
   });
 });

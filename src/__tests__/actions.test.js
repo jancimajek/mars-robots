@@ -56,12 +56,14 @@ describe('actions', () => {
       expect(dispatchedActions).toEqual([expectedAction]);
     });
 
-    it('should kill robot when it goes off the map', async () => {
+    it.each([
+      0, 90, 180, 270,
+    ])('should kill robot and add scent when it goes off the map facing %i degrees', async (orientation) => {
       const initialState = {
         map: { x: 0, y: 0 },
         scents: {},
         robot: {
-          x: 0, y: 0, orientation: 0, lost: false,
+          x: 0, y: 0, orientation, lost: false,
         },
       };
 

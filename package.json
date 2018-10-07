@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "babel src --out-dir build --ignore 'src/**/__tests__/*.js','src/**/*.spec.js','src/**/*.test.js'",
-    "debug": "nodemon --exec 'DEBUG=app* babel-node src/index'",
+    "debug": "nodemon --exec 'DEBUG=robots* babel-node src/index'",
     "husky:pre-commit": "yarn lint:staged && yarn test:coverage",
     "lint": "eslint src",
     "lint:staged": "git diff --diff-filter=d --cached --name-only | grep -E \"^(src)/.*\\.(js|jsx)$\" | xargs -I % sh -c 'git show \":%\" | eslint --stdin --stdin-filename \"%\";'",

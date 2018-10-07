@@ -1,3 +1,3 @@
 import * as types from './actionTypes';
 
-export const action = data => ({ type: types.ACTION, data });
+export const initMap = (x, y) => ({ type: types.INIT_MAP, x, y });

@@ -10,14 +10,14 @@ describe('reducer', () => {
     });
   });
 
-  describe('ACTION', () => {
-    it('should handle ACTION', () => {
-      const data = { a: [1, 2], s: 'test', i: 1 };
+  describe('INIT_MAP', () => {
+    it('should initialise the map', () => {
+      const [x, y] = [1, 2];
       const rest = {};
 
       const state = { rest };
-      const action = { type: types.ACTION, data };
-      const expectedState = { rest, data };
+      const action = { type: types.INIT_MAP, x, y };
+      const expectedState = { rest, map: { x, y } };
 
       expect(reducer(state, action)).toEqual(expectedState);
     });

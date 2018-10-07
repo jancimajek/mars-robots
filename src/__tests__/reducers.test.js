@@ -69,4 +69,29 @@ describe('reducer', () => {
       expect(reducer(state, action)).toEqual(expectedState);
     });
   });
+
+  describe('MOVE_ROBOT', () => {
+    it('should move a robot', () => {
+      const [x, y, orientation] = [1, 2, 180];
+      const rest = {};
+
+      const state = {
+        rest,
+        robot: {
+          x: 0, y: 0, orientation,
+        },
+      };
+      const action = {
+        type: types.MOVE_ROBOT, x, y,
+      };
+      const expectedState = {
+        rest,
+        robot: {
+          x, y, orientation,
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
 });

@@ -37,6 +37,16 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
+    case types.MOVE_ROBOT:
+      return {
+        ...state,
+        robot: {
+          ...state.robot,
+          x,
+          y,
+        },
+      };
+
     default:
       return state;
   }

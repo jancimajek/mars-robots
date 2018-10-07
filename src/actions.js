@@ -8,3 +8,4 @@ export const placeRobot = (x, y, heading) => ({
   type: types.PLACE_ROBOT, x, y, orientation: getOrientation(heading),
 });
 export const turnRobot = orientation => ({ type: types.TURN_ROBOT, orientation });
+export const moveRobot = (x, y) => ({ type: types.MOVE_ROBOT, x, y });

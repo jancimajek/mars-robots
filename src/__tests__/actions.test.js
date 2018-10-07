@@ -22,4 +22,10 @@ describe('actions', () => {
     const expectedAction = { type: types.TURN_ROBOT, orientation };
     expect(actions.turnRobot(orientation)).toEqual(expectedAction);
   });
+
+  it('moveRobot', () => {
+    const [x, y] = [1, 2];
+    const expectedAction = { type: types.MOVE_ROBOT, x, y };
+    expect(actions.moveRobot(x, y)).toEqual(expectedAction);
+  });
 });

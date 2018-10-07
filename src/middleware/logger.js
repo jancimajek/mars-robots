@@ -1,9 +1,11 @@
 
 import debug from '../utils/debug';
 
-const logger = () => next => (action) => {
+const logger = ({ getState }) => next => (action) => {
   debug('dispatch')('%o', action);
-  return next(action);
+  const result = next(action);
+  debug('state')('%O', getState());
+  return result;
 };
 
 export default logger;

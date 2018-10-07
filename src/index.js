@@ -16,9 +16,7 @@ debug('*')(store);
 const { dispatch, getState } = store;
 debug('state')(getState());
 dispatch(initMap(1, 2));
-debug('state')(getState());
 dispatch(placeRobot(0, 1, 'N'));
-debug('state')(getState());
 
 const rl = readline.createInterface({
   input: fs.createReadStream('input.txt', 'utf8'),

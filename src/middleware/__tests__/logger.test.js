@@ -40,5 +40,7 @@ describe('logger middleware', () => {
 
     expect(debug).toHaveBeenCalledWith('dispatch');
     expect(mockDebugModule).toHaveBeenCalledWith('%o', action);
+    expect(debug).toHaveBeenCalledWith('state');
+    expect(mockDebugModule).toHaveBeenCalledWith('%O', expectedState);
   });
 });

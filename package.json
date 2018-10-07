@@ -1,0 +1,96 @@
+{
+  "name": "boilerplate-node",
+  "version": "1.0.0",
+  "description": "Boilerplate for NodeJS apps",
+  "main": "index.js",
+  "author": "Jan Majek",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "debug": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.24.1",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.1.1",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "build": "babel src --out-dir build --ignore 'src/**/__tests__/*.js','src/**/*.spec.js','src/**/*.test.js'",
+    "debug": "nodemon --exec 'DEBUG=app* babel-node src/index'",
+    "husky:pre-commit": "yarn lint:staged && yarn test:coverage",
+    "lint": "eslint src",
+    "lint:staged": "git diff --diff-filter=d --cached --name-only | grep -E \"^(src)/.*\\.(js|jsx)$\" | xargs -I % sh -c 'git show \":%\" | eslint --stdin --stdin-filename \"%\";'",
+    "start": "yarn build && node build/index",
+    "test": "jest",
+    "test:coverage": "yarn test --verbose --coverage",
+    "test:watch": "yarn test --watchAll"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn husky:pre-commit"
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src/"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "jest/globals": true,
+      "es6": true
+    },
+    "settings": {
+      "ecmascript": 6,
+      "jsx": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "experimentalDecorators": true,
+        "jsx": true
+      },
+      "sourceType": "module"
+    },
+    "plugins": [
+      "jest"
+    ],
+    "extends": "airbnb",
+    "rules": {
+      "import/prefer-default-export": 0,
+      "function-paren-newline": 0,
+      "no-plusplus": 0
+    }
+  },
+  "eslintIgnore": [
+    "build/*"
+  ]
+}

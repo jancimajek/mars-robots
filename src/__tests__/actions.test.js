@@ -40,21 +40,29 @@ describe('actions', () => {
   });
 
   describe('moveRobotForward', () => {
-    it('should move robot in correct direction', async () => {
-      const initialState = {
-        map: { x: 2, y: 2 },
-        robot: {
-          x: 1, y: 1, orientation: 0,
-        },
-      };
+    it.each([
+      [0, 1, 2],
+      [90, 2, 1],
+      [180, 1, 0],
+      [270, 0, 1],
+    ])(
+      'should move robot in correct direction when facing %i degrees',
+      async (orientation, expectedX, expectedY) => {
+        const initialState = {
+          map: { x: 2, y: 2 },
+          robot: {
+            x: 1, y: 1, orientation, lost: false,
+          },
+        };
 
-      const store = mockStore(initialState);
-      await store.dispatch(actions.moveRobotForward());
+        const store = mockStore(initialState);
+        await store.dispatch(actions.moveRobotForward());
 
-      const dispatchedActions = store.getActions();
-      const expectedAction = actions.moveRobot(1, 2);
-      expect(dispatchedActions).toEqual([expectedAction]);
-    });
+        const dispatchedActions = store.getActions();
+        const expectedAction = actions.moveRobot(expectedX, expectedY);
+        expect(dispatchedActions).toEqual([expectedAction]);
+      },
+    );
 
     it.each([
       0, 90, 180, 270,

@@ -1,4 +1,6 @@
 import * as types from './actionTypes';
+import { isOffMap } from './selectors';
+
 import { getOrientation } from './utils/orientation';
 import { sind, cosd } from './utils/math';
 
@@ -20,5 +22,9 @@ export const moveRobotForward = () => (dispatch, getState) => {
   const newx = x + Math.round(sind(orientation));
   const newy = y + Math.round(cosd(orientation));
 
-  dispatch(moveRobot(newx, newy));
+  if (isOffMap(newx, newy)(state)) {
+    dispatch(killRobot());
+  } else {
+    dispatch(moveRobot(newx, newy));
+  }
 };

@@ -39,19 +39,40 @@ describe('actions', () => {
     expect(actions.killRobot()).toEqual(expectedAction);
   });
 
-  it('moveRobotForward', async () => {
-    const initialState = {
-      map: { x: 2, y: 2 },
-      robot: {
-        x: 1, y: 1, orientation: 0,
-      },
-    };
+  describe('moveRobotForward', () => {
+    it('should move robot in correct direction', async () => {
+      const initialState = {
+        map: { x: 2, y: 2 },
+        robot: {
+          x: 1, y: 1, orientation: 0,
+        },
+      };
 
-    const store = mockStore(initialState);
-    await store.dispatch(actions.moveRobotForward());
+      const store = mockStore(initialState);
+      await store.dispatch(actions.moveRobotForward());
 
-    const dispatchedActions = store.getActions();
-    const expectedAction = actions.moveRobot(1, 2);
-    expect(dispatchedActions).toEqual([expectedAction]);
+      const dispatchedActions = store.getActions();
+      const expectedAction = actions.moveRobot(1, 2);
+      expect(dispatchedActions).toEqual([expectedAction]);
+    });
+
+    it('should kill robot when it goes off the map', async () => {
+      const initialState = {
+        map: { x: 0, y: 0 },
+        scents: {},
+        robot: {
+          x: 0, y: 0, orientation: 0, lost: false,
+        },
+      };
+
+      const store = mockStore(initialState);
+      await store.dispatch(actions.moveRobotForward());
+
+      const dispatchedActions = store.getActions();
+      const expectedActions = [
+        actions.killRobot(),
+      ];
+      expect(dispatchedActions).toEqual(expectedActions);
+    });
   });
 });

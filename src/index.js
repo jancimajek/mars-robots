@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import readline from 'readline';
 import fs from 'fs';
+import thunk from 'redux-thunk';
 import {
-  initMap, placeRobot, turnRobot, moveRobot,
+  initMap, placeRobot, turnRobot, moveRobotForward,
 } from './actions';
 import reducer from './reducer';
 import logger from './middleware/logger';
@@ -11,7 +12,7 @@ import debug from './utils/debug';
 process.env.APP_NAME = process.env.APP_NAME || 'robots';
 const store = createStore(
   reducer,
-  applyMiddleware(logger),
+  applyMiddleware(thunk, logger),
 );
 debug('*')(store);
 
@@ -19,8 +20,10 @@ const { dispatch, getState } = store;
 debug('state')(getState());
 dispatch(initMap(1, 2));
 dispatch(placeRobot(0, 1, 'W'));
-dispatch(turnRobot(180));
-dispatch(moveRobot(1, 2));
+dispatch(turnRobot(0));
+dispatch(moveRobotForward());
+dispatch(turnRobot(90));
+dispatch(moveRobotForward());
 
 const rl = readline.createInterface({
   input: fs.createReadStream('input.txt', 'utf8'),

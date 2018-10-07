@@ -1,4 +1,9 @@
 import logger from '../logger';
+import debug from '../../utils/debug';
+
+jest.mock('../../utils/debug', () => jest.fn(
+  () => () => {},
+));
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -24,5 +29,14 @@ describe('logger middleware', () => {
     invoke(action);
 
     expect(next).toHaveBeenCalledWith(action);
+  });
+
+  it('should return call debug twice with action and state', () => {
+    const { invoke } = create();
+
+    const action = { type: 'TEST' };
+    invoke(action);
+
+    expect(debug).toHaveBeenCalledWith('dispatch');
   });
 });

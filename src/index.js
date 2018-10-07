@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import readline from 'readline';
 import fs from 'fs';
-import { initMap } from './actions';
+import { initMap, placeRobot } from './actions';
 import reducer from './reducer';
 import logger from './middleware/logger';
 import debug from './utils/debug';
@@ -16,6 +16,8 @@ debug('*')(store);
 const { dispatch, getState } = store;
 debug('state')(getState());
 dispatch(initMap(1, 2));
+debug('state')(getState());
+dispatch(placeRobot(0, 1, 'N'));
 debug('state')(getState());
 
 const rl = readline.createInterface({

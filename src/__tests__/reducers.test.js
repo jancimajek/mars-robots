@@ -22,4 +22,24 @@ describe('reducer', () => {
       expect(reducer(state, action)).toEqual(expectedState);
     });
   });
+
+  describe('PLACE_ROBOT', () => {
+    it('should place a new robot', () => {
+      const [x, y, heading] = [1, 2, 'E'];
+      const rest = {};
+
+      const state = { rest, robot: {} };
+      const action = {
+        type: types.PLACE_ROBOT, x, y, heading,
+      };
+      const expectedState = {
+        rest,
+        robot: {
+          x, y, heading,
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
 });

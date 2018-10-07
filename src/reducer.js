@@ -7,13 +7,25 @@ const defaultState = {
 };
 
 const reducer = (state = defaultState, action) => {
-  const { type, x, y } = action;
+  const {
+    type, x, y, heading,
+  } = action;
 
   switch (type) {
     case types.INIT_MAP:
       return {
         ...state,
         map: { ...state.map, x, y },
+      };
+
+    case types.PLACE_ROBOT:
+      return {
+        ...state,
+        robot: {
+          x,
+          y,
+          heading,
+        },
       };
 
     default:

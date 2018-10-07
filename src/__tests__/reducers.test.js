@@ -3,7 +3,11 @@ import * as types from '../actionTypes';
 
 describe('reducer', () => {
   it('should return initial state', () => {
-    expect(reducer(undefined, {})).toEqual({});
+    expect(reducer(undefined, {})).toEqual({
+      map: { x: 0, y: 0, scents: {} },
+      robot: {},
+      output: [],
+    });
   });
 
   describe('ACTION', () => {

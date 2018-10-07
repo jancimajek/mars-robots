@@ -8,7 +8,7 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   const {
-    type, x, y, heading,
+    type, x, y, orientation,
   } = action;
 
   switch (type) {
@@ -24,7 +24,7 @@ const reducer = (state = defaultState, action) => {
         robot: {
           x,
           y,
-          heading,
+          orientation,
         },
       };
 

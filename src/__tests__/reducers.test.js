@@ -25,17 +25,17 @@ describe('reducer', () => {
 
   describe('PLACE_ROBOT', () => {
     it('should place a new robot', () => {
-      const [x, y, heading] = [1, 2, 'E'];
+      const [x, y, orientation] = [1, 2, 90];
       const rest = {};
 
       const state = { rest, robot: {} };
       const action = {
-        type: types.PLACE_ROBOT, x, y, heading,
+        type: types.PLACE_ROBOT, x, y, orientation,
       };
       const expectedState = {
         rest,
         robot: {
-          x, y, heading,
+          x, y, orientation,
         },
       };
 

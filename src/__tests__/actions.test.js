@@ -9,11 +9,11 @@ describe('actions', () => {
   });
 
   it('placeRobot', () => {
-    const [x, y, heading] = [1, 2, 'E'];
+    const [x, y, orientation] = [1, 2, 180];
     const expectedAction = {
-      type: types.PLACE_ROBOT, x, y, heading,
+      type: types.PLACE_ROBOT, x, y, orientation,
     };
-    const action = actions.placeRobot(x, y, heading);
+    const action = actions.placeRobot(x, y, 'S');
     expect(action).toEqual(expectedAction);
   });
 });

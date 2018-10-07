@@ -32,6 +32,11 @@ describe('logger middleware', () => {
     expect(next).toHaveBeenCalledWith(action);
   });
 
+  it('should return result of the next dispatch handler', () => {
+    const { invoke } = create();
+    expect(invoke()).toBe(expectedResult);
+  });
+
   it('should return call debug twice with action and state', () => {
     const { invoke } = create();
 

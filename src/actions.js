@@ -1,6 +1,7 @@
 import debug from './utils/debug';
 
 import * as types from './actionTypes';
+import { ROTATION_ANGLE } from './constants';
 import { isOffMap, hasScent } from './selectors';
 
 import { getOrientation } from './utils/orientation';
@@ -17,7 +18,6 @@ export const placeRobot = (x, y, heading) => ({
 export const turnRobot = orientation => ({ type: types.TURN_ROBOT, orientation });
 export const moveRobot = (x, y) => ({ type: types.MOVE_ROBOT, x, y });
 export const killRobot = () => ({ type: types.KILL_ROBOT });
-
 
 export const moveRobotForward = () => (dispatch, getState) => {
   const state = getState();
@@ -36,4 +36,34 @@ export const moveRobotForward = () => (dispatch, getState) => {
   } else {
     dispatch(moveRobot(newx, newy));
   }
+};
+
+export const processInstructions = instructions => (dispatch, getState) => {
+  const { robot } = getState();
+  const {
+    orientation,
+  } = robot;
+
+  if (instructions.length === 0) {
+    return;
+  }
+
+  const instruction = instructions[0];
+  debug('instruction')('%o', instruction);
+
+  switch (instruction) {
+    case 'R':
+      dispatch(turnRobot((orientation + ROTATION_ANGLE) % 360));
+      break;
+    case 'L':
+      dispatch(turnRobot((orientation + 360 - ROTATION_ANGLE) % 360));
+      break;
+    case 'F':
+      dispatch(moveRobotForward());
+      break;
+    default:
+      break;
+  }
+
+  dispatch(processInstructions(instructions.slice(1)));
 };

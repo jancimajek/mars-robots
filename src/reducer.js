@@ -35,8 +35,8 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         robot: {
-          x,
-          y,
+          x: parseInt(x, 10),
+          y: parseInt(y, 10),
           orientation,
           lost: false,
         },

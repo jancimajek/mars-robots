@@ -149,6 +149,24 @@ describe('reducer', () => {
         },
       });
     });
+
+    it('should convert coordinates to numbers', () => {
+      const [x, y, orientation] = [1, 2, 90];
+      const rest = {};
+
+      const state = { rest, robot: {} };
+      const action = {
+        type: types.PLACE_ROBOT, x: '1', y: '2', orientation,
+      };
+      const expectedState = {
+        rest,
+        robot: {
+          x, y, orientation, lost: false,
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
   });
 
   describe('TURN_ROBOT', () => {

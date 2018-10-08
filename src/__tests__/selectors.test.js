@@ -1,5 +1,24 @@
 import * as selectors from '../selectors';
 
+test('hasScent', () => {
+  expect(selectors.hasScent(1, 2)({})).toBeFalsy();
+  expect(selectors.hasScent(1, 2)({
+    scents: {},
+  })).toBeFalsy();
+  expect(selectors.hasScent(1, 2)({
+    scents: { 1: {} },
+  })).toBeFalsy();
+  expect(selectors.hasScent(1, 2)({
+    scents: { 1: { 1: true } },
+  })).toBeFalsy();
+  expect(selectors.hasScent(1, 2)({
+    scents: { 2: { 1: true } },
+  })).toBeFalsy();
+  expect(selectors.hasScent(1, 2)({
+    scents: { 1: { 2: true } },
+  })).toBeTruthy();
+});
+
 test('isOffMap', () => {
   expect(selectors.isOffMap(1, 2)({
     map: { x: 1, y: 2 },

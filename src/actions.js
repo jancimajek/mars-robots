@@ -4,13 +4,17 @@ import * as types from './actionTypes';
 import { ROTATION_ANGLE } from './constants';
 import { isOffMap, hasScent } from './selectors';
 
-import { getOrientation } from './utils/orientation';
+import { getHeading, getOrientation } from './utils/orientation';
 import { sind, cosd } from './utils/math';
 
 
 export const initMap = (x, y) => ({ type: types.INIT_MAP, x, y });
 
 export const addScent = (x, y) => ({ type: types.ADD_SCENT, x, y });
+
+export const addOutput = (x, y, orientation, lost) => ({
+  type: types.ADD_OUTPUT, x, y, heading: getHeading(orientation), lost,
+});
 
 export const placeRobot = (x, y, heading) => ({
   type: types.PLACE_ROBOT, x, y, orientation: getOrientation(heading),

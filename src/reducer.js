@@ -9,14 +9,14 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   const {
-    type, x, y, orientation,
+    type, x, y, orientation, heading, lost,
   } = action;
 
   switch (type) {
     case types.INIT_MAP:
       return {
         ...state,
-        map: { ...state.map, x, y },
+        map: { x, y },
       };
 
     case types.ADD_SCENT:
@@ -68,6 +68,17 @@ const reducer = (state = defaultState, action) => {
           ...state.robot,
           lost: true,
         },
+      };
+
+    case types.ADD_OUTPUT:
+      return {
+        ...state,
+        output: [
+          ...state.output,
+          {
+            x, y, heading, lost,
+          },
+        ],
       };
 
     default:

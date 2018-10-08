@@ -225,4 +225,51 @@ describe('reducer', () => {
       expect(reducer(state, action)).toEqual(expectedState);
     });
   });
+
+  describe('ADD_OUTPUT', () => {
+    it('should add an object to an empty output', () => {
+      const [x, y, heading, lost] = [1, 2, 'E', false];
+      const rest = {};
+
+      const state = {
+        rest,
+        output: [],
+      };
+      const action = {
+        type: types.ADD_OUTPUT, x, y, heading, lost,
+      };
+      const expectedState = {
+        rest,
+        output: [{
+          x, y, heading, lost,
+        }],
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+
+    it('should add the same object to a non-empty output', () => {
+      const [x, y, heading, lost] = [1, 2, 'W', false];
+      const rest = {};
+      const output = [{
+        x, y, heading, lost,
+      }];
+
+      const state = {
+        rest,
+        output,
+      };
+      const action = {
+        type: types.ADD_OUTPUT, x, y, heading, lost,
+      };
+      const expectedState = {
+        rest,
+        output: [...output, {
+          x, y, heading, lost,
+        }],
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
 });

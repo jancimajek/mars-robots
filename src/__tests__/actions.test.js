@@ -86,6 +86,7 @@ describe('actions', () => {
 
       const dispatchedActions = store.getActions();
       const expectedActions = [
+        actions.addScent(0, 0),
         actions.killRobot(),
       ];
       expect(dispatchedActions).toEqual(expectedActions);

@@ -25,6 +25,7 @@ export const moveRobotForward = () => (dispatch, getState) => {
   const newy = y + Math.round(cosd(orientation));
 
   if (isOffMap(newx, newy)(state)) {
+    dispatch(addScent(x, y));
     dispatch(killRobot());
   } else {
     dispatch(moveRobot(newx, newy));

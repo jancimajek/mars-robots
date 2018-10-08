@@ -25,6 +25,7 @@ const reducer = (state = defaultState, action) => {
           x,
           y,
           orientation,
+          lost: false,
         },
       };
 

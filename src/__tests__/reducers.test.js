@@ -35,11 +35,29 @@ describe('reducer', () => {
       const expectedState = {
         rest,
         robot: {
-          x, y, orientation,
+          x, y, orientation, lost: false,
         },
       };
 
       expect(reducer(state, action)).toEqual(expectedState);
+    });
+
+    it('should replace an existing robot with a new one', () => {
+      const [x, y, orientation] = [1, 2, 90];
+      const rest = {};
+      expect(reducer({
+        rest,
+        robot: {
+          x: 2, y: 3, orientation: 180, lost: true,
+        },
+      }, {
+        type: types.PLACE_ROBOT, x, y, orientation,
+      })).toEqual({
+        rest,
+        robot: {
+          x, y, orientation, lost: false,
+        },
+      });
     });
   });
 

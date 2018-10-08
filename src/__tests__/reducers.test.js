@@ -63,15 +63,13 @@ describe('reducer', () => {
 
   describe('TURN_ROBOT', () => {
     it('should turn a robot', () => {
-      const [x, y, orientation] = [1, 2, 180, false];
+      const [x, y, orientation, lost] = [1, 2, 180, false];
       const rest = {};
 
       const state = {
         rest,
         robot: {
-          x,
-          y,
-          orientation: 90,
+          x, y, orientation: 90, lost,
         },
       };
       const action = {
@@ -80,7 +78,7 @@ describe('reducer', () => {
       const expectedState = {
         rest,
         robot: {
-          x, y, orientation,
+          x, y, orientation, lost,
         },
       };
 
@@ -90,13 +88,13 @@ describe('reducer', () => {
 
   describe('MOVE_ROBOT', () => {
     it('should move a robot', () => {
-      const [x, y, orientation] = [1, 2, 180];
+      const [x, y, orientation, lost] = [1, 2, 180, false];
       const rest = {};
 
       const state = {
         rest,
         robot: {
-          x: 0, y: 0, orientation,
+          x: 0, y: 0, orientation, lost,
         },
       };
       const action = {
@@ -105,7 +103,7 @@ describe('reducer', () => {
       const expectedState = {
         rest,
         robot: {
-          x, y, orientation,
+          x, y, orientation, lost,
         },
       };
 

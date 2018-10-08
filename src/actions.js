@@ -45,10 +45,11 @@ export const moveRobotForward = () => (dispatch, getState) => {
 export const processInstructions = instructions => (dispatch, getState) => {
   const { robot } = getState();
   const {
-    orientation,
+    x, y, orientation, lost,
   } = robot;
 
-  if (instructions.length === 0) {
+  if (lost || instructions.length === 0) {
+    dispatch(addOutput(x, y, orientation, lost));
     return;
   }
 

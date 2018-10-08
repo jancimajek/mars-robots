@@ -123,4 +123,39 @@ describe('actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
+  // TODO: add more tests
+  describe('processInstructions', () => {
+    it('should add output if no instructions left', async () => {
+      const [x, y, orientation, lost] = [1, 2, 90, false];
+      const initialState = {
+        robot: {
+          x, y, orientation, lost,
+        },
+      };
+
+      const store = mockStore(initialState);
+      await store.dispatch(actions.processInstructions([]));
+
+      const dispatchedActions = store.getActions();
+      const expectedAction = actions.addOutput(x, y, orientation, lost);
+      expect(dispatchedActions).toEqual([expectedAction]);
+    });
+
+    it('should add output if robot has been lost', async () => {
+      const [x, y, orientation, lost] = [1, 2, 90, true];
+      const initialState = {
+        robot: {
+          x, y, orientation, lost,
+        },
+      };
+
+      const store = mockStore(initialState);
+      await store.dispatch(actions.processInstructions(['R', 'F', 'L']));
+
+      const dispatchedActions = store.getActions();
+      const expectedAction = actions.addOutput(x, y, orientation, lost);
+      expect(dispatchedActions).toEqual([expectedAction]);
+    });
+  });
 });

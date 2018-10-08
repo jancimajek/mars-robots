@@ -2,7 +2,7 @@ import readline from 'readline';
 import fs from 'fs';
 import debug from './debug';
 
-export const processFileInput = filename => (lineProcessor) => {
+export const processFileInput = filename => lineProcessor => new Promise((resolve) => {
   const rl = readline.createInterface({
     input: fs.createReadStream(filename, 'utf8'),
     crlfDelay: Infinity,
@@ -22,5 +22,6 @@ export const processFileInput = filename => (lineProcessor) => {
 
   rl.on('close', () => {
     debug('input')('<EOF>');
+    resolve();
   });
-};
+});

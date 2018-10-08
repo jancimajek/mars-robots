@@ -4,7 +4,6 @@ import reducer from './reducer';
 import logger from './middleware/logger';
 import { initMap, placeRobot, processInstructions } from './actions';
 import { processFileInput } from './utils/input';
-import debug from './utils/debug';
 
 process.env.APP_NAME = process.env.APP_NAME || 'robots';
 const inputFile = process.env.INPUT_FILE || 'input.txt';
@@ -13,19 +12,8 @@ const store = createStore(
   reducer,
   applyMiddleware(thunk, logger),
 );
-debug('*')(store);
 
-const { dispatch, getState } = store;
-debug('state')(getState());
-dispatch(initMap(5, 3));
-dispatch(placeRobot(1, 1, 'E'));
-dispatch(processInstructions(['R', 'F', 'R', 'F', 'R', 'F', 'R', 'F']));
-dispatch(placeRobot(3, 2, 'N'));
-dispatch(processInstructions(['F', 'R', 'R', 'F', 'L', 'L', 'F', 'F', 'R', 'R', 'F', 'L', 'L']));
-dispatch(placeRobot(0, 3, 'W'));
-dispatch(processInstructions(['L', 'L', 'F', 'F', 'F', 'L', 'F', 'L', 'F', 'L']));
-
-(async () => {
+(async ({ dispatch }) => {
   await processFileInput(inputFile)((line, ln) => {
     if (ln === 0) {
       const [x, y] = line.split(' ');
@@ -50,4 +38,4 @@ dispatch(processInstructions(['L', 'L', 'F', 'F', 'F', 'L', 'F', 'L', 'F', 'L'])
   }) => {
     console.log(`${x} ${y} ${heading} ${lost ? 'LOST' : ''}`); // eslint-disable-line no-console
   });
-})();
+})(store);

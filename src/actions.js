@@ -1,5 +1,7 @@
+import debug from './utils/debug';
+
 import * as types from './actionTypes';
-import { isOffMap } from './selectors';
+import { isOffMap, hasScent } from './selectors';
 
 import { getOrientation } from './utils/orientation';
 import { sind, cosd } from './utils/math';
@@ -25,8 +27,12 @@ export const moveRobotForward = () => (dispatch, getState) => {
   const newy = y + Math.round(cosd(orientation));
 
   if (isOffMap(newx, newy)(state)) {
-    dispatch(addScent(x, y));
-    dispatch(killRobot());
+    if (!hasScent(x, y)(state)) {
+      dispatch(addScent(x, y));
+      dispatch(killRobot());
+    } else {
+      debug('danger')('Danger, Will Robinson!');
+    }
   } else {
     dispatch(moveRobot(newx, newy));
   }

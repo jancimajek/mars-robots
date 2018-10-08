@@ -45,6 +45,7 @@ describe('actions', () => {
     expect(actions.killRobot()).toEqual(expectedAction);
   });
 
+  // TODO: mock selectors
   describe('moveRobotForward', () => {
     it.each([
       [0, 1, 2],
@@ -91,5 +92,25 @@ describe('actions', () => {
       ];
       expect(dispatchedActions).toEqual(expectedActions);
     });
+
+    it.each([
+      0, 90, 180, 270,
+    ])('should do nothing when the position has scent and robot tries to go off the map (facing %i degrees)',
+      async (orientation) => {
+        const initialState = {
+          map: { x: 0, y: 0 },
+          scents: { 0: { 0: true } },
+          robot: {
+            x: 0, y: 0, orientation, lost: false,
+          },
+        };
+
+        const store = mockStore(initialState);
+        await store.dispatch(actions.moveRobotForward());
+
+        const dispatchedActions = store.getActions();
+        const expectedActions = [];
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
   });
 });

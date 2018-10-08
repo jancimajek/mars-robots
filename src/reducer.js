@@ -1,7 +1,8 @@
 import * as types from './actionTypes';
 
 const defaultState = {
-  map: { x: 0, y: 0, scents: {} },
+  map: { x: 0, y: 0 },
+  scents: {},
   robot: {},
   output: [],
 };
@@ -16,6 +17,18 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         map: { ...state.map, x, y },
+      };
+
+    case types.ADD_SCENT:
+      return {
+        ...state,
+        scents: {
+          ...state.scents,
+          [x]: {
+            ...state.scents[x],
+            [y]: true,
+          },
+        },
       };
 
     case types.PLACE_ROBOT:

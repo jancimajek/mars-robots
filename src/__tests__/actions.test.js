@@ -13,6 +13,12 @@ describe('actions', () => {
     expect(actions.initMap(x, y)).toEqual(expectedAction);
   });
 
+  it('addScent', () => {
+    const [x, y] = [1, 2];
+    const expectedAction = { type: types.ADD_SCENT, x, y };
+    expect(actions.addScent(x, y)).toEqual(expectedAction);
+  });
+
   it('placeRobot', () => {
     const [x, y, orientation] = [1, 2, 180];
     const expectedAction = {

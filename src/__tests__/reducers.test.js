@@ -4,7 +4,8 @@ import * as types from '../actionTypes';
 describe('reducer', () => {
   it('should return initial state', () => {
     expect(reducer(undefined, {})).toEqual({
-      map: { x: 0, y: 0, scents: {} },
+      map: { x: 0, y: 0 },
+      scents: {},
       robot: {},
       output: [],
     });
@@ -18,6 +19,95 @@ describe('reducer', () => {
       const state = { rest };
       const action = { type: types.INIT_MAP, x, y };
       const expectedState = { rest, map: { x, y } };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+  });
+
+  describe('ADD_SCENT', () => {
+    it('should add new scent to empty scents', () => {
+      const [x, y] = [1, 2];
+      const rest = {};
+
+      const state = { rest, scents: {} };
+      const action = { type: types.ADD_SCENT, x, y };
+      const expectedState = {
+        rest,
+        scents: { [x]: { [y]: true } },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+
+    it('should keep a scent if already added', () => {
+      const [x, y] = [1, 2];
+      const rest = {};
+
+      const state = {
+        rest,
+        scents: { [x]: { [y]: true } },
+      };
+      const action = { type: types.ADD_SCENT, x, y };
+      const expectedState = {
+        rest,
+        scents: { [x]: { [y]: true } },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+
+    it('should add a scent if different x coordinate', () => {
+      const [x, y] = [1, 2];
+      const newx = 2;
+      const rest = {};
+
+      const state = {
+        rest,
+        scents: { [x]: { [y]: true } },
+      };
+      const action = {
+        type: types.ADD_SCENT,
+        x: newx,
+        y,
+      };
+      const expectedState = {
+        rest,
+        scents: {
+          [x]: {
+            [y]: true,
+          },
+          [newx]: {
+            [y]: true,
+          },
+        },
+      };
+
+      expect(reducer(state, action)).toEqual(expectedState);
+    });
+
+    it('should add a scent if different y coordinate', () => {
+      const [x, y] = [1, 2];
+      const newy = 3;
+      const rest = {};
+
+      const state = {
+        rest,
+        scents: { [x]: { [y]: true } },
+      };
+      const action = {
+        type: types.ADD_SCENT,
+        x,
+        y: newy,
+      };
+      const expectedState = {
+        rest,
+        scents: {
+          [x]: {
+            [y]: true,
+            [newy]: true,
+          },
+        },
+      };
 
       expect(reducer(state, action)).toEqual(expectedState);
     });

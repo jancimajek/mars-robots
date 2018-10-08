@@ -33,7 +33,8 @@ const store = createStore(
     }
   });
 
-  store.getState().output.forEach(({
+  const { output } = store.getState();
+  output.forEach(({
     x, y, heading, lost,
   }) => {
     console.log(`${x} ${y} ${heading} ${lost ? 'LOST' : ''}`); // eslint-disable-line no-console

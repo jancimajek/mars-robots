@@ -2,6 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as actions from '../actions';
 import * as types from '../actionTypes';
+import { getHeading, getOrientation } from '../utils/orientation';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -19,12 +20,21 @@ describe('actions', () => {
     expect(actions.addScent(x, y)).toEqual(expectedAction);
   });
 
+  it('addOutput', () => {
+    const [x, y, heading, lost] = [1, 2, 'E', true];
+    const expectedAction = {
+      type: types.ADD_OUTPUT, x, y, heading, lost,
+    };
+    const action = actions.addOutput(x, y, getOrientation(heading), lost);
+    expect(action).toEqual(expectedAction);
+  });
+
   it('placeRobot', () => {
     const [x, y, orientation] = [1, 2, 180];
     const expectedAction = {
       type: types.PLACE_ROBOT, x, y, orientation,
     };
-    const action = actions.placeRobot(x, y, 'S');
+    const action = actions.placeRobot(x, y, getHeading(orientation));
     expect(action).toEqual(expectedAction);
   });
 

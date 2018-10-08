@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-node",
+  "name": "mars-robots",
   "version": "1.0.0",
-  "description": "Boilerplate for NodeJS apps",
+  "description": "Mars robots problem",
   "main": "index.js",
   "author": "Jan Majek",
   "license": "MIT",

@@ -24,6 +24,11 @@ yarn test:coverage
 yarn start
 ```
 
+or to read the intput from a custom file:
+```bash
+INPUT_FILE=custom_input.txt yarn start
+```
+
 ## 🏗 Develop
 
 Run the app in watch mode with debugging on

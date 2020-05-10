@@ -6,11 +6,12 @@
   "author": "Jan Majek",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/jancimajek/mars-robots.git"
+    "type": "git",
+    "url": "https://github.com/jancimajek/mars-robots.git"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "core-js": "^3.6.5",
     "debug": "^4.0.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
@@ -22,16 +23,16 @@
     "@babel/preset-env": "^7.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "eslint": "^5.6.1",
-    "eslint-config-airbnb": "^17.1.0",
+    "babel-jest": "^26.0.1",
+    "eslint": ">=5",
+    "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.24.1",
+    "eslint-plugin-jest": "23.10.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "husky": "^1.1.1",
-    "jest": "^23.6.0",
-    "nodemon": "^1.18.4",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3",
     "redux-mock-store": "^1.5.3"
   },
   "scripts": {
